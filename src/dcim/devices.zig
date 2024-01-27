@@ -132,3 +132,26 @@ test "device" {
     try std.testing.expect(parsed.value.rack.?.id == 1);
     try std.testing.expect(std.mem.eql(u8, parsed.value.face.?.value, "front"));
 }
+
+const DCIM = @import("../dcim.zig").DCIM;
+const GetResult = @import("../api/get.zig").GetResult;
+const ListIterator = @import("../api/list.zig").ListIterator;
+const ListOptions = @import("../api/list.zig").ListOptions;
+
+pub const DEVICES = struct {
+    api: *API,
+
+    pub fn get(self: DEVICES, id: u64) !GetResult(Device) {
+        return try self.api.get(Device, id);
+    }
+
+    pub fn list(self: DEVICES, options: ListOptions) !ListIterator(Device) {
+        return try self.api.list(Device, options);
+    }
+};
+
+pub fn devices(self: DCIM) DEVICES {
+    return .{
+        .api = self.api,
+    };
+}
