@@ -1,0 +1,42 @@
+{
+    "id": 19639,
+    "url": "https://demo.netbox.dev/api/ipam/ip-addresses/19639/",
+    "display": "2001:db8:0:fffe::b/127",
+    "family": {
+        "value": 6,
+        "label": "IPv6"
+    },
+    "address": "2001:db8:0:fffe::b/127",
+    "vrf": null,
+    "tenant": null,
+    "status": {
+        "value": "active",
+        "label": "Active"
+    },
+    "role": null,
+    "assigned_object_type": "dcim.interface",
+    "assigned_object_id": 33,
+    "assigned_object": {
+        "id": 33,
+        "url": "https://demo.netbox.dev/api/dcim/interfaces/33/",
+        "display": "GigabitEthernet0/0/0",
+        "device": {
+            "id": 8,
+            "url": "https://demo.netbox.dev/api/dcim/devices/8/",
+            "display": "router-1",
+            "name": "router-1"
+        },
+        "name": "GigabitEthernet0/0/0",
+        "cable": null,
+        "_occupied": false
+    },
+    "nat_inside": null,
+    "nat_outside": [],
+    "dns_name": "",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "custom_fields": {},
+    "created": "2023-09-30T11:36:02.058117-05:00",
+    "last_updated": "2023-09-30T11:36:02.128811-05:00"
+}

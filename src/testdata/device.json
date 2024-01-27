@@ -1,0 +1,98 @@
+{
+    "id": 14,
+    "url": "https://demo.netbox.dev/api/dcim/devices/14/",
+    "display": "dmi01-akron-sw01",
+    "name": "dmi01-akron-sw01",
+    "device_type": {
+        "id": 7,
+        "url": "https://demo.netbox.dev/api/dcim/device-types/7/",
+        "display": "C9200-48P",
+        "manufacturer": {
+            "id": 3,
+            "url": "https://demo.netbox.dev/api/dcim/manufacturers/3/",
+            "display": "Cisco",
+            "name": "Cisco",
+            "slug": "cisco"
+        },
+        "model": "C9200-48P",
+        "slug": "c9200-48p"
+    },
+    "role": {
+        "id": 4,
+        "url": "https://demo.netbox.dev/api/dcim/device-roles/4/",
+        "display": "Access Switch",
+        "name": "Access Switch",
+        "slug": "access-switch"
+    },
+    "device_role": {
+        "id": 4,
+        "url": "https://demo.netbox.dev/api/dcim/device-roles/4/",
+        "display": "Access Switch",
+        "name": "Access Switch",
+        "slug": "access-switch"
+    },
+    "tenant": {
+        "id": 5,
+        "url": "https://demo.netbox.dev/api/tenancy/tenants/5/",
+        "display": "Dunder-Mifflin, Inc.",
+        "name": "Dunder-Mifflin, Inc.",
+        "slug": "dunder-mifflin"
+    },
+    "platform": null,
+    "serial": "",
+    "asset_tag": null,
+    "site": {
+        "id": 2,
+        "url": "https://demo.netbox.dev/api/dcim/sites/2/",
+        "display": "DM-Akron",
+        "name": "DM-Akron",
+        "slug": "dm-akron"
+    },
+    "location": null,
+    "rack": {
+        "id": 1,
+        "url": "https://demo.netbox.dev/api/dcim/racks/1/",
+        "display": "Comms closet",
+        "name": "Comms closet"
+    },
+    "position": 10.0,
+    "face": {
+        "value": "front",
+        "label": "Front"
+    },
+    "latitude": null,
+    "longitude": null,
+    "parent_device": null,
+    "status": {
+        "value": "active",
+        "label": "Active"
+    },
+    "airflow": null,
+    "primary_ip": null,
+    "primary_ip4": null,
+    "primary_ip6": null,
+    "oob_ip": null,
+    "cluster": null,
+    "virtual_chassis": null,
+    "vc_position": null,
+    "vc_priority": null,
+    "description": "",
+    "comments": "",
+    "config_template": null,
+    "config_context": {},
+    "local_context_data": null,
+    "tags": [],
+    "custom_fields": {},
+    "created": "2020-12-22T00:00:00Z",
+    "last_updated": "2020-12-22T02:11:11.625000Z",
+    "console_port_count": 0,
+    "console_server_port_count": 0,
+    "power_port_count": 0,
+    "power_outlet_count": 0,
+    "interface_count": 0,
+    "front_port_count": 0,
+    "rear_port_count": 0,
+    "device_bay_count": 0,
+    "module_bay_count": 0,
+    "inventory_item_count": 0
+}

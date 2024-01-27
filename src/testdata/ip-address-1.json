@@ -1,0 +1,35 @@
+{
+    "id": 31,
+    "url": "https://demo.netbox.dev/api/ipam/ip-addresses/31/",
+    "display": "172.16.0.1/24",
+    "family": {
+        "value": 4,
+        "label": "IPv4"
+    },
+    "address": "172.16.0.1/24",
+    "vrf": {
+        "id": 1,
+        "url": "https://demo.netbox.dev/api/ipam/vrfs/1/",
+        "display": "Alpha (65000:100)",
+        "name": "Alpha",
+        "rd": "65000:100"
+    },
+    "tenant": null,
+    "status": {
+        "value": "active",
+        "label": "Active"
+    },
+    "role": null,
+    "assigned_object_type": null,
+    "assigned_object_id": null,
+    "assigned_object": null,
+    "nat_inside": null,
+    "nat_outside": [],
+    "dns_name": "",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "custom_fields": {},
+    "created": "2022-04-08T00:25:21.668000Z",
+    "last_updated": "2022-04-08T00:25:21.668000Z"
+}
