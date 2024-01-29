@@ -77,7 +77,7 @@ pub fn one(
 
     switch (result) {
         .ok => |r| {
-            const xarena = std.heap.ArenaAllocator.init(self.alloc);
+            var xarena = std.heap.ArenaAllocator.init(self.alloc);
             const xalloc = xarena.allocator();
             const parsed = try std.json.parseFromSliceLeaky(Paginated(T), xalloc, r.data, .{});
 
