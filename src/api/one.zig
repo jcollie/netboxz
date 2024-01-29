@@ -70,7 +70,7 @@ pub fn one(
         buffer.writer(),
     );
 
-    const result = try self.api.request(.GET, uri, null);
+    const result = try self.request(.GET, uri, null);
     defer result.deinit();
 
     switch (result) {
