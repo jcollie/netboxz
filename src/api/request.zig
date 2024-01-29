@@ -1,5 +1,6 @@
 const std = @import("std");
 const API = @import("../api.zig");
+const uriparser = @import("uriparser");
 
 pub const Result = union(enum) {
     ok: struct {

@@ -1,5 +1,6 @@
 const std = @import("std");
 const API = @import("../api.zig");
+const Paginated = @import("pagination.zig").Paginated;
 
 pub fn ListIterator(comptime T: type) type {
     return struct {
@@ -39,15 +40,6 @@ pub fn ListIterator(comptime T: type) type {
                         .err => |r| r.deinit(),
                     }
                 }
-            };
-        }
-
-        pub fn Paginated(comptime I: type) type {
-            return struct {
-                count: u32,
-                next: ?[]const u8,
-                previous: ?[]const u8,
-                results: []I,
             };
         }
 
@@ -106,40 +98,6 @@ pub fn ListIterator(comptime T: type) type {
         }
     };
 }
-
-// pub fn ListResult(comptime T: type) type {
-//     return union(enum) {
-//         ok: struct {
-//             api: *API,
-//             arena: std.heap.ArenaAllocator,
-//             status: std.http.Status,
-//             count: u64,
-//             next_uri: ?[]const u8,
-//             previous_uri: ?[]const u8,
-//             items: []T,
-
-//             pub fn deinit(self: @This()) void {
-//                 self.arena.deinit();
-//             }
-//         },
-//         err: struct {
-//             api: *API,
-//             status: std.http.Status,
-//             detail: []const u8,
-
-//             pub fn deinit(self: @This()) void {
-//                 self.api.alloc.free(self.detail);
-//             }
-//         },
-
-//         pub fn deinit(self: @This()) void {
-//             switch (self) {
-//                 .ok => |r| r.deinit(),
-//                 .err => |r| r.deinit(),
-//             }
-//         }
-//     };
-// }
 
 pub const FilterOperation = @import("filter.zig").FilterOperation;
 

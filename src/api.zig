@@ -50,6 +50,8 @@ pub const request = @import("api/request.zig").request;
 
 pub const get = @import("api/get.zig").get;
 
+pub const one = @import("api/one.zig").one;
+
 pub const ListOptions = @import("api/list.zig").ListOptions;
 pub const ListIterator = @import("api/list.zig").ListIterator;
 pub const FilterOperation = @import("api/list.zig").FilterOperation;
