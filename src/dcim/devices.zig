@@ -123,34 +123,20 @@ test "device" {
     );
     defer parsed.deinit();
     try std.testing.expect(parsed.value.id == 14);
-    try std.testing.expect(std.mem.eql(u8, parsed.value.url, "https://demo.netbox.dev/api/dcim/devices/14/"));
-    try std.testing.expect(std.mem.eql(u8, parsed.value.display, "dmi01-akron-sw01"));
-    try std.testing.expect(std.mem.eql(u8, parsed.value.name.?, "dmi01-akron-sw01"));
+    try std.testing.expectEqualSlices(u8, "https://demo.netbox.dev/api/dcim/devices/14/", parsed.value.url);
+    try std.testing.expectEqualSlices(u8, "dmi01-akron-sw01", parsed.value.display);
+    try std.testing.expectEqualSlices(u8, "dmi01-akron-sw01", parsed.value.name.?);
     try std.testing.expect(parsed.value.device_type.manufacturer.id == 3);
     try std.testing.expect(parsed.value.asset_tag == null);
     try std.testing.expect(parsed.value.site.id == 2);
     try std.testing.expect(parsed.value.rack.?.id == 1);
-    try std.testing.expect(std.mem.eql(u8, parsed.value.face.?.value, "front"));
+    try std.testing.expectEqualSlices(u8, "front", parsed.value.face.?.value);
 }
 
-const DCIM = @import("../dcim.zig").DCIM;
-const GetResult = @import("../api/get.zig").GetResult;
-const ListIterator = @import("../api/list.zig").ListIterator;
-const ListOptions = @import("../api/list.zig").ListOptions;
+const DCIM = @import("../dcim.zig");
+const Adapter = @import("../api/adapter.zig").Adapter;
 
-pub const DEVICES = struct {
-    api: *API,
-
-    pub fn get(self: DEVICES, id: u64) !GetResult(Device) {
-        return try self.api.get(Device, id);
-    }
-
-    pub fn list(self: DEVICES, options: ListOptions) !ListIterator(Device) {
-        return try self.api.list(Device, options);
-    }
-};
-
-pub fn devices(self: DCIM) DEVICES {
+pub fn devices(self: DCIM) Adapter(Device) {
     return .{
         .api = self.api,
     };

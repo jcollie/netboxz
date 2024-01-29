@@ -195,3 +195,12 @@ test "ip-address-2" {
     try std.testing.expect(parsed.value.assigned_object.?.DeviceInterface.id == 33);
     try std.testing.expect(std.mem.eql(u8, parsed.value.status.value, "active"));
 }
+
+const IPAM = @import("../ipam.zig");
+const Adapter = @import("../api/adapter.zig").Adapter;
+
+pub fn ip_addresses(self: IPAM) Adapter(IPAddress) {
+    return .{
+        .api = self.api,
+    };
+}

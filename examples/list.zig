@@ -1,18 +1,18 @@
 const std = @import("std");
 
-const NetBoxZ = @import("netboxz");
+const netboxz = @import("netboxz");
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const alloc = gpa.allocator();
 
-    const netbox = try NetBoxZ.init(alloc, "https://demo.netbox.dev", null);
+    const netbox = try netboxz.init(alloc, "https://demo.netbox.dev", null);
     defer netbox.deinit();
 
     var device_iter = try netbox.dcim().devices().list(
         .{
             .limit = 1,
-            .filters = &[_]NetBoxZ.FilterOperation{
+            .filters = &[_]netboxz.FilterOperation{
                 .{
                     .string = .{
                         .key = "name",

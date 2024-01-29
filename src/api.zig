@@ -7,8 +7,8 @@ uri: []const u8,
 client: std.http.Client,
 headers: std.http.Headers,
 
-pub const dcim = @import("dcim.zig").dcim;
-pub const ipam = @import("ipam.zig").ipam;
+pub const dcim = @import("dcim.zig").init;
+pub const ipam = @import("ipam.zig").init;
 
 pub fn init(alloc: std.mem.Allocator, uri: []const u8, token: ?[]const u8) !*API {
     _ = try std.Uri.parse(uri);
@@ -27,6 +27,14 @@ pub fn init(alloc: std.mem.Allocator, uri: []const u8, token: ?[]const u8) !*API
     return api;
 }
 
+pub fn deinit(self: *API) void {
+    const alloc = self.alloc;
+    self.headers.deinit();
+    self.client.deinit();
+    alloc.free(self.uri);
+    alloc.destroy(self);
+}
+
 pub fn addToken(self: *API, token: []const u8) !void {
     self.removeToken();
     var buf: [256]u8 = undefined;
@@ -38,17 +46,10 @@ pub fn removeToken(self: *API) void {
     _ = self.headers.delete("Authorization");
 }
 
-pub fn deinit(self: *API) void {
-    const alloc = self.alloc;
-    self.headers.deinit();
-    self.client.deinit();
-    alloc.free(self.uri);
-    alloc.destroy(self);
-}
-
 pub const request = @import("api/request.zig").request;
 
 pub const get = @import("api/get.zig").get;
+
 pub const ListOptions = @import("api/list.zig").ListOptions;
 pub const ListIterator = @import("api/list.zig").ListIterator;
 pub const FilterOperation = @import("api/list.zig").FilterOperation;
