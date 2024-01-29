@@ -40,28 +40,57 @@ pub fn main() !void {
         }
     }
 
-    var addr_iter = try netbox.ipam().ip_addresses().list(
-        .{
-            .limit = 2,
-        },
-    );
-    defer addr_iter.deinit();
+    {
+        var addr_iter = try netbox.ipam().ip_addresses().list(
+            .{
+                .limit = 2,
+            },
+        );
+        defer addr_iter.deinit();
 
-    var iter_count: usize = 0;
-    while (try addr_iter.next()) |result| {
-        defer result.deinit();
-        switch (result) {
-            .ok => |r| {
-                iter_count += 1;
-                std.debug.print("{d} {d}\n", .{ iter_count, r.count });
-                for (r.items) |addr| {
-                    std.debug.print("{d} {d} {} {s}\n", .{ iter_count, addr.id, addr.family, addr.address });
-                }
+        var iter_count: usize = 0;
+        while (try addr_iter.next()) |result| {
+            defer result.deinit();
+            switch (result) {
+                .ok => |r| {
+                    iter_count += 1;
+                    std.debug.print("{d} {d}\n", .{ iter_count, r.count });
+                    for (r.items) |addr| {
+                        std.debug.print("{d} {d} {} {s}\n", .{ iter_count, addr.id, addr.family, addr.address });
+                    }
+                },
+                .err => |r| {
+                    std.debug.print("error: {} {s}\n", .{ r.status, r.detail });
+                    break;
+                },
+            }
+        }
+    }
+
+    {
+        var iter = try netbox.dcim().manufacturers().list(
+            .{
+                .limit = 2,
             },
-            .err => |r| {
-                std.debug.print("error: {} {s}\n", .{ r.status, r.detail });
-                break;
-            },
+        );
+        defer iter.deinit();
+
+        var iter_count: usize = 0;
+        while (try iter.next()) |result| {
+            defer result.deinit();
+            switch (result) {
+                .ok => |r| {
+                    iter_count += 1;
+                    std.debug.print("{d} {d}\n", .{ iter_count, r.count });
+                    for (r.items) |item| {
+                        std.debug.print("{d} {d} {s}\n", .{ iter_count, item.id, item.display });
+                    }
+                },
+                .err => |r| {
+                    std.debug.print("error: {} {s}\n", .{ r.status, r.detail });
+                    break;
+                },
+            }
         }
     }
 }

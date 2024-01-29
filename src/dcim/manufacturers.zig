@@ -24,5 +24,14 @@ pub const Manufacturer = struct {
     inventoryitem_count: u64,
     platform_count: u64,
 
-    const path = "dcim/manufacturers";
+    pub const path = "dcim/manufacturers";
 };
+
+const DCIM = @import("../dcim.zig");
+const Adapter = @import("../api/adapter.zig").Adapter;
+
+pub fn manufacturers(self: DCIM) Adapter(Manufacturer) {
+    return .{
+        .api = self.api,
+    };
+}
