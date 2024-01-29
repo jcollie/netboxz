@@ -72,7 +72,7 @@ pub fn one(
         buffer.writer(),
     );
 
-    const result = try self.request(.GET, buffer.toOwnedSlice(), null);
+    const result = try self.request(.GET, try buffer.toOwnedSlice(), null);
     defer result.deinit();
 
     switch (result) {
