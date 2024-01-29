@@ -11,6 +11,10 @@ pub fn OneResult(comptime T: type) type {
             arena: std.heap.ArenaAllocator,
             status: std.http.Status,
             value: T,
+
+            pub fn deinit(self: @This()) void {
+                self.arena.deinit();
+            }
         },
         notfound: struct {
             api: *API,
@@ -26,11 +30,17 @@ pub fn OneResult(comptime T: type) type {
             api: *API,
             status: std.http.Status,
             detail: []const u8,
+
+            pub fn deinit(self: @This()) void {
+                self.api.alloc.free(self.detail);
+            }
         },
 
         pub fn deinit(self: @This()) void {
             switch (self) {
                 .ok => |r| r.deinit(),
+                .notfound => {},
+                .toomany => {},
                 .err => |r| r.deinit(),
             }
         }
@@ -41,7 +51,7 @@ pub fn one(
     self: *API,
     comptime T: type,
     filters: []const FilterOperation,
-) !?OneResult(T) {
+) !OneResult(T) {
     var arena = std.heap.ArenaAllocator.init(self.alloc);
     defer arena.deinit();
 
@@ -88,7 +98,7 @@ pub fn one(
                         .notfound = .{
                             .api = self,
                             .status = r.status,
-                            .count = r.count,
+                            .count = parsed.count,
                         },
                     };
                 },
@@ -108,7 +118,7 @@ pub fn one(
                         .toomany = .{
                             .api = self,
                             .status = r.status,
-                            .count = r.count,
+                            .count = parsed.count,
                         },
                     };
                 },
@@ -117,9 +127,9 @@ pub fn one(
         .err => |r| {
             return .{
                 .err = .{
-                    .api = self.api,
+                    .api = self,
                     .status = r.status,
-                    .detail = try self.api.alloc.dupe(u8, r.detail),
+                    .detail = try self.alloc.dupe(u8, r.detail),
                 },
             };
         },
