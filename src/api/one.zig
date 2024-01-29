@@ -59,6 +59,8 @@ pub fn one(
     }
 
     var buffer = std.ArrayList(u8).init(arena.allocator());
+    errdefer buffer.deinit();
+
     try uri.writeToStream(
         .{
             .scheme = true,
@@ -70,7 +72,7 @@ pub fn one(
         buffer.writer(),
     );
 
-    const result = try self.request(.GET, uri, null);
+    const result = try self.request(.GET, buffer.toOwnedSlice(), null);
     defer result.deinit();
 
     switch (result) {
