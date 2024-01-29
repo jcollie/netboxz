@@ -14,7 +14,7 @@ pub fn Adapter(comptime T: type) type {
             return try self.api.get(T, id);
         }
 
-        pub fn one(self: @This(), filter: []FilterOperation) !OneResult(T) {
+        pub fn one(self: @This(), filter: []const FilterOperation) !OneResult(T) {
             return try self.api.one(T, filter);
         }
 
