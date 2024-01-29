@@ -40,7 +40,7 @@ pub fn OneResult(comptime T: type) type {
 pub fn one(
     self: *API,
     comptime T: type,
-    filters: []FilterOperation,
+    filters: []const FilterOperation,
 ) !?OneResult(T) {
     var arena = std.heap.ArenaAllocator.init(self.alloc);
     defer arena.deinit();
