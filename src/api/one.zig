@@ -14,12 +14,12 @@ pub fn OneResult(comptime T: type) type {
         },
         notfound: struct {
             api: *API,
-            status: std.heap.Status,
+            status: std.http.Status,
             count: u64,
         },
         toomany: struct {
             api: *API,
-            status: std.heap.Status,
+            status: std.http.Status,
             count: u64,
         },
         err: struct {
